@@ -21,8 +21,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity
-                .csrf(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/register").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
 
