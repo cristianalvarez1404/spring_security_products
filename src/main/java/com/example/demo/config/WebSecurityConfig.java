@@ -23,15 +23,15 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/register","/login").permitAll()
                         .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
 
         return httpSecurity.build();
     }
 
-    @Bean
+    //@Bean => Active this only when we're use memory users.
     public UserDetailsService userDetailsService(){
         UserDetails joe = User
                 .withUsername("joe")
